@@ -11,24 +11,32 @@ class AccountModel implements ModelInterface {
 
 
     addUserAccount(userAccount: Account): void {
+        if (this._registeredAccounts.length === 0) {
+            this._registeredAccounts.push(userAccount);
+            console.log(`Successfully Created Account!`);
+        } else {
+            for (const account of this._registeredAccounts) {
 
-        for (const account of this._registeredAccounts) {
+                if (account.id === userAccount.id) {
+                    console.log(`User already exists with ID ${userAccount.id}`);
+                    break;
+                } else {
+                    this._registeredAccounts.push(userAccount);
+                    console.log(`Successfully Created Account!`);
 
-            if (account.id === userAccount.id) {
-                console.log(`User already exists with ID ${userAccount.id}`);
-                break;
-            } else {
-                this._registeredAccounts.push(userAccount);
+                }
+
             }
-
         }
+
+
     }
 
     loginToUserAccount(loginId: string, loginPinNumber: string): void {
         for (const account of this._registeredAccounts) {
 
             if (account.id === loginId && loginPinNumber === loginPinNumber) {
-                console.log(`Welcome ${account.firstName} ${account.lastName}`);
+                console.log(`\nWelcome to your account ${account.firstName} ${account.lastName}`);
             } else {
                 console.log(`Incorrect Login ID: ${loginId} or Login Pin Number: ${loginPinNumber}`);
                 break;
