@@ -1,5 +1,4 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/byCTYTBp)
-# TypeScript Lab
+# Assignment - Defining and Managing User Stories in GitHub
 
 ## Setup and Initialization
 
@@ -23,40 +22,41 @@
 
 ## Implementation Details:
 
-Create an type `Todo` that defines the structure of a todo item. It should include:
+Create a type `Account` that defines the structure of a account item. It should include:
 
 - `id` (a unique identifier, e.g., a number or string)
-- `title` (a string)
-- `description` (a string)
-- `completed` (a boolean indicating if the todo is done)
+- `firstName` (a string)
+- `lastName` (a string)
+- `pinNumber` (a number)
 
-Create a `TodoManager` class that manages the list of todos. The class should include methods for:
+Create an `AccoountController` class that manages all account behaviors. The class should include methods for:
 
-- Adding a new todo
-- Removing a todo by its `id`
-- Listing all todos
-- Marking a todo as completed
+- Create an `Account`
+- Login to an `Account`
+- Display account balance
+- Deposit to account
+- Withdraw from account
 
 Implement the methods and ensure that each method adhers to the expected types and interfaces. Feel free to add other classes, functions, and types in addition to the ones defined in this README.
 
 ## Testing
 
-The entry point of the app is `src/index.ts` that will use the `TodoManager` class. This script should:
+The entry point of the app is `src/index.ts` that will use the `AccoountController` class. This script should:
 
-- Add a few todos
-- List all todos
-- Remove a todo
-- Mark a todo as completed
-- List all todos again to show updates
+- Add a few accounts
+- Deposit to accounts
+- Withdraw from accounts
+- Display account balances
 
 ## Deliverables
 
-We should be able to run the app with the command `npm start`. The script should allow users to do the following with command line arguments:
+We should be able to run the app with the command `npx ts-node index.ts`. The script should allow users to do the following with command line arguments:
 
-- Add a todo item
-- View all todos
-- Remove a todo
-- Mark todo as completed
+- Create an `Account`
+- Login to an `Account`
+- Display account balance
+- Deposit to account
+- Withdraw from account
 
 Add a README file called `instructions.md` and accurately describe all the necessary instructions to run the app.
 
