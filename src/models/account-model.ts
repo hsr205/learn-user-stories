@@ -42,6 +42,7 @@ class AccountModel implements ModelInterface {
 
             if (account.id === loginId && loginPinNumber === loginPinNumber) {
                 console.log(`\nWelcome to your account ${account.firstName} ${account.lastName}`);
+
             } else {
                 console.log(`Incorrect Login ID: ${loginId} or Login Pin Number: ${loginPinNumber}`);
                 break;
@@ -51,13 +52,19 @@ class AccountModel implements ModelInterface {
     }
 
     displayAccountBalance(): void {
+        console.log("Inside displayAccountBalance() method");
     }
 
     depositFunds(numFunds: number): void {
+        console.log("Inside depositFunds() method");
+        console.log(`numFunds = ${numFunds}`)
+
     }
 
 
     withdrawFunds(numFunds: number): void {
+        console.log("Inside withdrawFunds() method");
+        console.log(`numFunds = ${numFunds}`)
     }
 
 
