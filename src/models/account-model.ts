@@ -32,6 +32,11 @@ class AccountModel implements ModelInterface {
 
     }
 
+    // TODO: Add logic when the user logs in they are allowed to do any of the following:
+    //  (1) Deposit Funds
+    //  (2) Withdraw funds
+    //  (3) Display Balance
+    //  (4) Logout of Account
     loginToUserAccount(loginId: string, loginPinNumber: string): void {
         for (const account of this._registeredAccounts) {
 
