@@ -8,7 +8,7 @@ interface ModelInterface {
 
     withdrawFunds(numFunds: number): void;
 
-    displayAccountBalance(numFunds: number): void;
+    displayAccountBalance(): void;
 
 }
 
