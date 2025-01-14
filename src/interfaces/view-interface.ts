@@ -4,6 +4,8 @@ interface ViewInterface {
 
     displayCommandMenu(): void;
 
+    displayAccountActionsMenu(): void;
+
     getUserResponse(prompt: string): Promise<string>;
 
 }

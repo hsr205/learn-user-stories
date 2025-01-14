@@ -43,6 +43,20 @@ class AccountView implements ViewInterface {
         );
     }
 
+    public displayAccountActionsMenu(): void {
+        console.log(
+            `
+            Please enter a number that corresponds to one of the following actions:
+            
+            (1) Display Account Balance
+            (2) Deposit To Account
+            (3) Withdraw From Account
+            `
+        );
+    }
+
+
+
 
 }
 
