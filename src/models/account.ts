@@ -1,8 +1,8 @@
 type Account = {
-    id: string | number;
+    id: string;
     firstName: string;
     lastName: string;
-    pinNumber: string | number;
+    pinNumber: string;
 }
 
 export default Account;
