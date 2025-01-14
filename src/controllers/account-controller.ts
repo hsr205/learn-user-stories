@@ -1,9 +1,9 @@
 import ViewInterface from "../interfaces/view-interface";
 import ControllerInterface from "../interfaces/controller-interface";
 import ModelInterface from "../interfaces/model-interface";
-import Todo from "../models/account";
+import Account from "../models/account";
 
-class TodoController implements ControllerInterface {
+class AccountController implements ControllerInterface {
 
     private view: ViewInterface;
     private model: ModelInterface;
@@ -23,41 +23,40 @@ class TodoController implements ControllerInterface {
     public async handleUserResponse(userResponse: string): Promise<void> {
         switch (userResponse) {
             case "1":
-                this._displayTodoItemInsertionInstructions()
-                const id: string = await this.view.getUserResponse("Enter ID: ");
-                const title: string = await this.view.getUserResponse("Enter Title: ");
-                const description: string = await this.view.getUserResponse("Enter Description: ");
+                this._displayAccountRegistrationInstructions()
+                const firstName: string = await this.view.getUserResponse("Enter First Name: ");
+                const lastName: string = await this.view.getUserResponse("Enter Last Name: ");
+                const pinNumber: string = await this.view.getUserResponse("Enter Pin Number: ");
 
-                const completed: string = await this.view.getUserResponse("Enter Completed Status: ");
+                const accountObj: Account = {
 
-                const todoObj: Todo = {
-                    id: id,
-                    title: title,
-                    description: description,
-                    completed: this._stringToBoolean(completed)
+                    id: 10001,
+                    firstName: firstName,
+                    lastName: lastName,
+                    pinNumber: pinNumber,
                 };
 
-                this.model.addTodoItem(todoObj);
+                this.model.addUserAccount(accountObj);
                 this.view.displayCommandMenu();
                 await this.handleUserResponse(await this.view.getUserResponse("Enter Action Number: "));
                 break;
             case "2":
                 console.log();
-                this.model.displayTodoItems()
+                this.model.displayAccountBalance()
                 this.view.displayCommandMenu();
                 await this.handleUserResponse(await this.view.getUserResponse("Enter Action Number: "));
                 break;
             case "3":
-                console.log(`\nPlease Enter the ID of the element you wish to remove.`);
-                const idToRemove: string = await this.view.getUserResponse("Enter ID: ");
-                this.model.removeTodoItem(idToRemove);
+                console.log(`\nPlease enter the amount of funds you wish to deposit.`);
+                const fundsToDeposit: string = await this.view.getUserResponse("Enter Amount: ");
+                this.model.depositFunds(Number(fundsToDeposit))
                 this.view.displayCommandMenu();
                 await this.handleUserResponse(await this.view.getUserResponse("Enter Action Number: "));
                 break;
             case "4":
-                console.log(`\nPlease Enter the ID of the element you wish to mark as completed.`);
-                const idToLookUp: string = await this.view.getUserResponse("Enter ID: ");
-                this.model.markTodoItemAsCompleted(idToLookUp);
+                console.log(`\nPlease enter the amount of funds to withdrawal.`);
+                const fundsToWithdraw: string = await this.view.getUserResponse("Enter Amount: ");
+                this.model.withdrawFunds(Number(fundsToWithdraw))
                 this.view.displayCommandMenu();
                 await this.handleUserResponse(await this.view.getUserResponse("Enter Action Number: "));
                 break;
@@ -75,31 +74,23 @@ class TodoController implements ControllerInterface {
     };
 
 
-    private _displayTodoItemInsertionInstructions(): void {
+    private _displayAccountRegistrationInstructions(): void {
         console.log(`
-                Please enter a Todo item with the following values:
-                (ID, TITLE, DESCRIPTION, COMPLETED-STATUS)
+                Please enter your account registration information with the following values:
+                (FIRST-NAME, LAST-NAME, PIN-NUMBER))
                 
                 *DISCLAIMER*
                 
-                (1) ID must be a unique value
-                (2) COMPLETED-STATUS must be either true or false.
-                
                 For Example:
                 
-                Enter ID: 1
-                Enter Title: My Title
-                Enter Description: My Description
-                Enter Completed Status: true
+                Enter First Name: John
+                Enter Last Name: Smith
+                Enter Pin Number: 12345
                 `);
-    }
-
-    private _stringToBoolean(value: string): boolean {
-        return value.toLowerCase() === 'true';
     }
 
 
 }
 
 
-export default TodoController;
+export default AccountController;
