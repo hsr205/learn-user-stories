@@ -1,4 +1,4 @@
-# Foundations of Software Engineering - TypeScript Lab
+# Foundations of Software Engineering - Assignment - Defining and Managing User Stories in GitHub
 
 ## Table of Contents
 
