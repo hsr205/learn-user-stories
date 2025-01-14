@@ -1,14 +1,43 @@
 import Account from "./account";
 import ModelInterface from "../interfaces/model-interface";
+import * as console from "node:console";
 
 class AccountModel implements ModelInterface {
 
+    private _registeredAccounts: Account[] = [];
 
     public constructor() {
     }
 
 
     addUserAccount(userAccount: Account): void {
+
+        for (const account of this._registeredAccounts) {
+
+            if (account.id === userAccount.id) {
+                console.log(`User already exists with ID ${userAccount.id}`);
+                break;
+            } else {
+                this._registeredAccounts.push(userAccount);
+            }
+
+        }
+    }
+
+    loginToUserAccount(loginId: string, loginPinNumber: string): void {
+        for (const account of this._registeredAccounts) {
+
+            if (account.id === loginId && loginPinNumber === loginPinNumber) {
+                console.log(`Welcome ${account.firstName} ${account.lastName}`);
+            } else {
+                console.log(`Incorrect Login ID: ${loginId} or Login Pin Number: ${loginPinNumber}`);
+                break;
+            }
+
+        }
+    }
+
+    displayAccountBalance(): void {
     }
 
     depositFunds(numFunds: number): void {
@@ -18,8 +47,7 @@ class AccountModel implements ModelInterface {
     withdrawFunds(numFunds: number): void {
     }
 
-    displayAccountBalance(): void {
-    }
+
 }
 
 export default AccountModel;
