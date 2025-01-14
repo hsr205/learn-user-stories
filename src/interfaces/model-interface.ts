@@ -4,13 +4,13 @@ interface ModelInterface {
 
     addUserAccount(userAccount: Account): void;
 
-    loginToUserAccount(loginId: string, loginPinNumber: string): void;
+    loginToUserAccount(loginId: string, loginPinNumber: string): boolean;
 
-    depositFunds(numFunds: number): void;
+    depositFunds(loginId: string, numFunds: number): void;
 
-    withdrawFunds(numFunds: number): void;
+    withdrawFunds(loginId: string, numFunds: number): void;
 
-    displayAccountBalance(): void;
+    displayAccountBalance(loginId: string): void;
 
 }
 
