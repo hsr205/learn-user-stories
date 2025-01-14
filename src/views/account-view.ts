@@ -35,10 +35,7 @@ class AccountView implements ViewInterface {
             
             (1) Create An Account
             (2) Login to Account
-            (3) Display Account Balance
-            (4) Deposit To Account
-            (5) Withdraw From Account
-            (6) Exit Program
+            (3) Exit Program
             `
         );
     }
@@ -51,11 +48,10 @@ class AccountView implements ViewInterface {
             (1) Display Account Balance
             (2) Deposit To Account
             (3) Withdraw From Account
+            (4) Exit Account
             `
         );
     }
-
-
 
 
 }
