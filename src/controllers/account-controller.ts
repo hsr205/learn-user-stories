@@ -45,29 +45,25 @@ class AccountController implements ControllerInterface {
                 const loginPinNumber: string = await this.view.getUserResponse("Enter Pin Number: ");
 
                 this.model.loginToUserAccount(loginId, loginPinNumber)
-                this.view.displayCommandMenu();
+                this.view.displayAccountActionsMenu()
+                const actionNumber: string = await this.view.getUserResponse("Enter Account Action Number: ");
+
+                switch (actionNumber) {
+                    case "1":
+                        this.model.displayAccountBalance()
+                        break;
+                    case "2":
+                        const fundsToDeposit: string = await this.view.getUserResponse("Enter Number to Deposit: $");
+                        this.model.depositFunds(Number(fundsToDeposit));
+                        break;
+                    case "3":
+                        const fundsToWithdraw: string = await this.view.getUserResponse("Enter Number to Withdraw: $");
+                        this.model.withdrawFunds(Number(fundsToWithdraw))
+                }
+
                 await this.handleUserResponse(await this.view.getUserResponse("Enter Action Number: "));
                 break;
             case "3":
-                this.model.displayAccountBalance()
-                this.view.displayCommandMenu();
-                await this.handleUserResponse(await this.view.getUserResponse("Enter Action Number: "));
-                break;
-            case "4":
-                console.log(`\nPlease enter the amount of funds you wish to deposit.`);
-                const fundsToDeposit: string = await this.view.getUserResponse("Enter Amount: ");
-                this.model.depositFunds(Number(fundsToDeposit))
-                this.view.displayCommandMenu();
-                await this.handleUserResponse(await this.view.getUserResponse("Enter Action Number: "));
-                break;
-            case "5":
-                console.log(`\nPlease enter the amount of funds to withdrawal.`);
-                const fundsToWithdraw: string = await this.view.getUserResponse("Enter Amount: ");
-                this.model.withdrawFunds(Number(fundsToWithdraw))
-                this.view.displayCommandMenu();
-                await this.handleUserResponse(await this.view.getUserResponse("Enter Action Number: "));
-                break;
-            case "6":
                 console.log(`\nExiting Program`);
                 process.exit(0);
                 break;
