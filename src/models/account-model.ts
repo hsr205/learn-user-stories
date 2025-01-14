@@ -13,61 +13,84 @@ class AccountModel implements ModelInterface {
     addUserAccount(userAccount: Account): void {
         if (this._registeredAccounts.length === 0) {
             this._registeredAccounts.push(userAccount);
-            console.log(`Successfully Created Account!`);
-        } else {
-            for (const account of this._registeredAccounts) {
-
-                if (account.id === userAccount.id) {
-                    console.log(`User already exists with ID ${userAccount.id}`);
-                    break;
-                } else {
-                    this._registeredAccounts.push(userAccount);
-                    console.log(`Successfully Created Account!`);
-
-                }
-
-            }
+            console.log(`\nSuccessfully Created Account!`);
+            return;
         }
-
-
-    }
-
-    // TODO: Add logic when the user logs in they are allowed to do any of the following:
-    //  (1) Deposit Funds
-    //  (2) Withdraw funds
-    //  (3) Display Balance
-    //  (4) Logout of Account
-    loginToUserAccount(loginId: string, loginPinNumber: string): void {
         for (const account of this._registeredAccounts) {
 
-            if (account.id === loginId && loginPinNumber === loginPinNumber) {
-                console.log(`\nWelcome to your account ${account.firstName} ${account.lastName}`);
+            if (account.id === userAccount.id) {
+                console.log(`\nUser already exists with ID ${userAccount.id}`);
+                return;
+            }
+        }
 
-            } else {
-                console.log(`Incorrect Login ID: ${loginId} or Login Pin Number: ${loginPinNumber}`);
-                break;
+        this._registeredAccounts.push(userAccount);
+        console.log(`\nSuccessfully Created Account!`);
+
+    }
+
+    loginToUserAccount(loginId: string, loginPinNumber: string): boolean {
+
+        if (this._registeredAccounts.length === 0) {
+            console.log(`\nNo Account Has Been Created!.`);
+            return false;
+        }
+
+        for (const account of this._registeredAccounts) {
+
+            if (account.id === loginId && account.pinNumber === loginPinNumber) {
+                console.log(`\nWelcome to your account ${account.fullName}`);
+                return true;
+
+            }
+        }
+        console.log(`\nIncorrect Login ID: ${loginId} or Login Pin Number: ${loginPinNumber}`);
+
+        return false;
+    }
+
+    displayAccountBalance(loginId: string): void {
+
+        for (const account of this._registeredAccounts) {
+
+            if (account.id === loginId) {
+                console.log(`\nAccount Balance: $${account.accountBalance}`);
+                return;
+            }
+
+        }
+
+    }
+
+    depositFunds(loginId: string, numFunds: number): void {
+        for (const account of this._registeredAccounts) {
+
+            if (account.id === loginId) {
+                account.accountBalance += numFunds;
+                console.log(`\nAccount Balance: $${account.accountBalance}`);
+                return;
             }
 
         }
     }
 
-    displayAccountBalance(): void {
-        console.log("Inside displayAccountBalance() method");
+
+    withdrawFunds(loginId: string, numFunds: number): void {
+        for (const account of this._registeredAccounts) {
+
+            if (account.id === loginId) {
+                if (account.accountBalance < numFunds) {
+                    console.log(`\nCannot withdraw $${numFunds} as your balance is only $${account.accountBalance}`);
+                    return;
+                }
+                account.accountBalance -= numFunds;
+                console.log(`\nAccount Balance: $${account.accountBalance}`);
+                return;
+
+            }
+        }
+
     }
-
-    depositFunds(numFunds: number): void {
-        console.log("Inside depositFunds() method");
-        console.log(`numFunds = ${numFunds}`)
-
-    }
-
-
-    withdrawFunds(numFunds: number): void {
-        console.log("Inside withdrawFunds() method");
-        console.log(`numFunds = ${numFunds}`)
-    }
-
-
 }
 
 export default AccountModel;
