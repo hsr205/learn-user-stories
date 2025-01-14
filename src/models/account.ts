@@ -1,8 +1,8 @@
 type Account = {
     id: string;
-    firstName: string;
-    lastName: string;
+    fullName: string;
     pinNumber: string;
+    accountBalance: number;
 }
 
 export default Account;
