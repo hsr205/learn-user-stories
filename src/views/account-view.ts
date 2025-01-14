@@ -24,10 +24,7 @@ class AccountView implements ViewInterface {
     }
 
     public displayWelcomeMessage(): void {
-        console.log(`
-            Welcome to the Bank of Software Engineers:
-            `
-        );
+        console.log(`Welcome to the Bank of Software Engineers:`);
     };
 
 
@@ -37,10 +34,11 @@ class AccountView implements ViewInterface {
             Please enter a number that corresponds to one of the following actions:
             
             (1) Create An Account
-            (2) Display Account Balance
-            (3) Deposit To Account
-            (4) Withdraw From Account
-            (5) Exit Program
+            (2) Login to Account
+            (3) Display Account Balance
+            (4) Deposit To Account
+            (5) Withdraw From Account
+            (6) Exit Program
             `
         );
     }
