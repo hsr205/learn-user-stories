@@ -14,12 +14,12 @@ class AccountModel implements ModelInterface {
     depositFunds(numFunds: number): void {
     }
 
-    displayAccountBalance(numFunds: number): void {
-    }
 
     withdrawFunds(numFunds: number): void {
     }
 
+    displayAccountBalance(): void {
+    }
 }
 
 export default AccountModel;
