@@ -25,7 +25,7 @@ class AccountView implements ViewInterface {
 
     public displayWelcomeMessage(): void {
         console.log(`
-            Welcome to the Todo List Application:
+            Welcome to the Bank of Software Engineers:
             `
         );
     };
@@ -36,10 +36,10 @@ class AccountView implements ViewInterface {
             `
             Please enter a number that corresponds to one of the following actions:
             
-            (1) Add a Todo Item
-            (2) List All Todo Items
-            (3) Remove a Todo Item
-            (4) Mark a Todo as Completed
+            (1) Create An Account
+            (2) Display Account Balance
+            (3) Deposit To Account
+            (4) Withdraw From Account
             (5) Exit Program
             `
         );
