@@ -11,23 +11,10 @@ const ACCOUNT_1: Account = {
     accountBalance: 0
 }
 
-const ACCOUNT_2: Account = {
-    id: "10010",
-    fullName: "Jane Smith",
-    pinNumber: "99999",
-    accountBalance: 1000
-}
-
-const ACCOUNT_3: Account = {
-    id: "10100",
-    fullName: "John Doe",
-    pinNumber: "102938",
-    accountBalance: 500
-}
-
 
 function resetState(): void {
     accountModel = new AccountModel();
+    ACCOUNT_1.accountBalance = 0;
 }
 
 
@@ -37,19 +24,72 @@ describe("AccountModel - All Class Behaviours Check", () => {
     })
     it("Should confirm that funds deposited reflect the to the account value", () => {
 
-        const consoleLogSpy = jest.spyOn(console, "log").mockImplementation(() => {
-        });
-
+        let expectedValue: number = 100;
 
         accountModel.addUserAccount(ACCOUNT_1);
         accountModel.loginToUserAccount(ACCOUNT_1.id, ACCOUNT_1.pinNumber)
         accountModel.depositFunds(ACCOUNT_1.id, 100)
 
-        accountModel.displayAccountBalance(ACCOUNT_1.id)
-        expect(consoleLogSpy).toHaveBeenCalledWith("Account Balance: $100");
+        expect(ACCOUNT_1.accountBalance).toBe(expectedValue);
 
-        // Restore the original implementation
-        consoleLogSpy.mockRestore();
     });
+
+    it("Should confirm that funds deposited reflect the to the account value", () => {
+
+        let expectedValue: number = 300;
+
+        accountModel.addUserAccount(ACCOUNT_1);
+        accountModel.loginToUserAccount(ACCOUNT_1.id, ACCOUNT_1.pinNumber)
+        accountModel.depositFunds(ACCOUNT_1.id, 100)
+        accountModel.depositFunds(ACCOUNT_1.id, 100)
+        accountModel.depositFunds(ACCOUNT_1.id, 100)
+
+        expect(ACCOUNT_1.accountBalance).toBe(expectedValue);
+
+    });
+
+    it("Should confirm that funds withdrawn/deposited reflect the to the account value", () => {
+
+        let expectedValue: number = 150;
+
+        accountModel.addUserAccount(ACCOUNT_1);
+        accountModel.loginToUserAccount(ACCOUNT_1.id, ACCOUNT_1.pinNumber)
+        accountModel.depositFunds(ACCOUNT_1.id, 100)
+        accountModel.depositFunds(ACCOUNT_1.id, 100)
+        accountModel.withdrawFunds(ACCOUNT_1.id, 50)
+
+        expect(ACCOUNT_1.accountBalance).toBe(expectedValue);
+
+    });
+
+    it("Should confirm that funds remain the same as withdraw funds exceed amount in account", () => {
+
+        let expectedValue: number = 200;
+
+        accountModel.addUserAccount(ACCOUNT_1);
+        accountModel.loginToUserAccount(ACCOUNT_1.id, ACCOUNT_1.pinNumber)
+        accountModel.depositFunds(ACCOUNT_1.id, 100)
+        accountModel.depositFunds(ACCOUNT_1.id, 100)
+        accountModel.withdrawFunds(ACCOUNT_1.id, 1000)
+
+        expect(ACCOUNT_1.accountBalance).toBe(expectedValue);
+
+    });
+
+
+    it("Should confirm that funds are 0 after withdraw", () => {
+
+        let expectedValue: number = 0;
+
+        accountModel.addUserAccount(ACCOUNT_1);
+        accountModel.loginToUserAccount(ACCOUNT_1.id, ACCOUNT_1.pinNumber)
+        accountModel.depositFunds(ACCOUNT_1.id, 100)
+        accountModel.depositFunds(ACCOUNT_1.id, 100)
+        accountModel.withdrawFunds(ACCOUNT_1.id, 200)
+
+        expect(ACCOUNT_1.accountBalance).toBe(expectedValue);
+
+    });
+
 
 });
