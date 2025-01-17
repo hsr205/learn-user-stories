@@ -11,6 +11,13 @@ const ACCOUNT_1: Account = {
     accountBalance: 0
 }
 
+const DUPLICATE_ACCOUNT: Account = {
+    id: "10001",
+    fullName: "John Smith",
+    pinNumber: "12345",
+    accountBalance: 0
+}
+
 
 function resetState(): void {
     accountModel = new AccountModel();
@@ -18,7 +25,7 @@ function resetState(): void {
 }
 
 
-describe("AccountModel - All Class Behaviours Check", () => {
+describe("AccountModel - Behaviour Checks", () => {
     beforeEach(() => {
         resetState();
     })
@@ -92,4 +99,36 @@ describe("AccountModel - All Class Behaviours Check", () => {
     });
 
 
+    it("Should console log a message that the a user already exists with ID passed", () => {
+
+        accountModel.addUserAccount(ACCOUNT_1);
+        accountModel.addUserAccount(DUPLICATE_ACCOUNT);
+
+    });
+
+    it("Should console log a message the a negative amount cannot be deposited", () => {
+
+        let expectedValue: number = 0;
+
+        accountModel.addUserAccount(ACCOUNT_1);
+        accountModel.loginToUserAccount(ACCOUNT_1.id, ACCOUNT_1.pinNumber)
+        accountModel.depositFunds(ACCOUNT_1.id, -100)
+
+        expect(ACCOUNT_1.accountBalance).toBe(expectedValue);
+
+    });
+
+    it("Should console log a message the a negative amount cannot be withdrawn", () => {
+
+        let expectedValue: number = 0;
+
+        accountModel.addUserAccount(ACCOUNT_1);
+        accountModel.loginToUserAccount(ACCOUNT_1.id, ACCOUNT_1.pinNumber)
+        accountModel.withdrawFunds(ACCOUNT_1.id, -100)
+
+        expect(ACCOUNT_1.accountBalance).toBe(expectedValue);
+
+    });
+
 });
+
