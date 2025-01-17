@@ -66,6 +66,10 @@ class AccountModel implements ModelInterface {
         for (const account of this._registeredAccounts) {
 
             if (account.id === loginId) {
+                if (numFunds < 0){
+                    console.log(`\nCannot deposit negative funds $${numFunds}`);
+                    return;
+                }
                 account.accountBalance += numFunds;
                 console.log(`\nAccount Balance: $${account.accountBalance}`);
                 return;
@@ -81,6 +85,10 @@ class AccountModel implements ModelInterface {
             if (account.id === loginId) {
                 if (account.accountBalance < numFunds) {
                     console.log(`\nCannot withdraw $${numFunds} as your balance is only $${account.accountBalance}`);
+                    return;
+                }
+                if (numFunds < 0){
+                    console.log(`\nCannot withdraw negative funds $${numFunds}`);
                     return;
                 }
                 account.accountBalance -= numFunds;
